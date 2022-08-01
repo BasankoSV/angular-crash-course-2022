@@ -21,9 +21,9 @@
  async pipe (см.ниже) автоматически подпишется на стрим, без subscribe, а как только получит данные - выведет их.
 -->
 
-    <div *ngIf="products$ | async as products">
+    <div *ngIf="productsService.products">
       <app-product
-        *ngFor="let product of products | filterProducts: term"
+        *ngFor="let product of productsService.products | filterProducts: term"
         [product]="product"
       ></app-product>
     </div>
@@ -42,3 +42,4 @@
 
 <!--  <app-product [product]="products[0]"></app-product>-->
 <!--  <app-product [product]="products[1]"></app-product>-->
+<!--<div *ngIf="products$ | async as products"> изменили хранение продуктов через локальный products в сервисе-->
