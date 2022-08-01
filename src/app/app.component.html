@@ -1,7 +1,15 @@
 <app-global-error></app-global-error>
 
 <div class="max-w-2xl container mx-auto pt-5">
+
   <h1 class="font-bold mb-2 text-center text-lg">{{ title | titlecase }}</h1>
+
+  <input
+    type="text"
+    class="mb2 border py-2 px-4 w-full"
+    placeholder="Filter products..."
+    [(ngModel)]="term"
+  >
 
   <p *ngIf="loading" class="text-center text-lg">Loading...</p>
 
@@ -13,10 +21,13 @@
  async pipe (см.ниже) автоматически подпишется на стрим, без subscribe, а как только получит данные - выведет их.
 -->
 
-    <app-product
-      *ngFor="let product of products$ | async"
-      [product]="product"
-    ></app-product>
+    <div *ngIf="products$ | async as products">
+      <app-product
+        *ngFor="let product of products | filterProducts: term"
+        [product]="product"
+      ></app-product>
+    </div>
+
 </div>
 
 <!--  <app-product [product]="products[0]"></app-product>-->
